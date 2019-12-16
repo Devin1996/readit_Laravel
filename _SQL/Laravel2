@@ -1,0 +1,150 @@
+Laravel
+
+Terminal
+
+cd .. -c/users
+cd .. -c 
+cd xampp/htdocs
+composer create-project laravel/laravel lsapp
+
+clear
+
+C:\xampp\apache\conf\extra
+
+httpd-vhosts.conf
+
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs"
+    ServerName localhost 
+</VirtualHost>
+
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs/lsapp/public"
+    ServerName lsapp.dev
+</VirtualHost> 
+
+Notpad - > Run as Admin
+
+open
+
+C:\Windows\System32\drivers\etc
+
+hosts
+
+127.0.0.1 localhost
+127.0.0.1 lsapp.dev
+
+route -> web.php	
+
+Route::get('/about', function () {
+    return view('pages.about');
+});
+
+$ php artisan make:controller PagesController
+Controller created successfully.
+
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PagesController extends Controller
+{
+    public function index(){
+        return 'INDEX';       
+    }
+}
+
+Route::get('/','PagesController@index');
+
+.env
+
+APP_NAME=LSAPP
+
+
+//Laravel Layout part
+
+install blade vc
+
+ext instal laravel-blade
+
+Back to Bash
+.....compile......
+npm install
+npm run dev
+npm run watch
+
+variables.scss
+$body-bg change
+
+new file custom.scss
+
+getbootstrap.com
+https://getbootstrap.com/docs/4.3/examples/starter-template/
+
+php artisan make:controller PostsController
+php artisan make:model Post -m
+$ php artisan migrate
+
+$ php artisan tinker
+
+APP\Post::count()
+
+>>> $post = new App\Post();
+=> App\Post {#2873}
+>>> $post->title='Article One'
+=> "Article One"
+>>> $post->body='This is the first Article';
+=> "This is the first Article"
+>>> $post->save();
+=> true
+
+delete postscontroller
+
+$ php artisan make:controller PostsController --resource
+Controller created successfully.
+
+$ php artisan route:list
+ 
+laravel collective
+
+https://laravelcollective.com/docs/6.0/html
+
+$ composer require "laravelcollective/html":"^5.4.0"
+
+New Nav bar with login
+
+$ php artisan make:auth
+
+Addd user Identification for the posts db table
+
+$ php artisan make:migration add_user_id_to_posts
+Created Migration: 2019_12_06_123505_add_user_id_to_posts
+
+After doing modifications in the file 2019_12_06_123505_add_user_id_to_posts
+
+$ php artisan migrate
+Migrating: 2019_12_06_123505_add_user_id_to_posts
+Migrated:  2019_12_06_123505_add_user_id_to_posts
+
+noe u have user_id column in posts table
+
+Video 10 
+
+Add the relationship betwen Usr and post
+
+Video 11
+ Access ciontrol
+ User cannot acccess articles without Log in 
+
+ /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
